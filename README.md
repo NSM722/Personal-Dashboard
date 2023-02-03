@@ -13,6 +13,7 @@ Free APIs used in the project are :
  - Random Quotes/Advice API 
  - Sports API for the EPL Table standings 
 
+Try out the [live demo](https://teal-lolly-2f9beb.netlify.app "Personal Dashboard")
 
 ### Other Features to add :
  - Enable image caching
