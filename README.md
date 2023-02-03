@@ -9,7 +9,7 @@ Basically, It's the default page that will pop up once a user opens up a new tab
 Free APIs used in the project are :
  - Unsplash photos API
  - Crypto currencies API
- - Weather API
+ - Weather API (User has to allow location access for the data to be rendered)
  - Random Quotes/Advice API 
  - Sports API for the EPL Table standings 
 
