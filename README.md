@@ -15,6 +15,9 @@ Free APIs used in the project are :
 
 Try out the [live demo](https://teal-lolly-2f9beb.netlify.app "Personal Dashboard")
 
+<img width="100%" alt="personal_dashboard_bg" src="https://user-images.githubusercontent.com/83452606/216811575-8bd716c3-4d51-4c34-b1e0-80f6b7359d42.png">
+
+
 ### Other Features to add :
  - Enable image caching
  - Include SameSite cookie attribute
