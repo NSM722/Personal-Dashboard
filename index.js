@@ -14,7 +14,7 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
       document.getElementById('location').innerHTML = `<p class="text-xl"><i class="fa-solid fa-location-pin text-orange-500"></i>&nbsp;Not Available</p>`
     }
   })
-  .catch(err => {
+  .catch(_err => {
     // Default background image and location
     document.body.style.backgroundImage = defaultBgImage
     document.getElementById('location').textContent = defaultLocation
@@ -24,7 +24,7 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 fetch("https://api.coingecko.com/api/v3/coins/ethereum")
   .then(res => {
     if (!res.ok) {
-      throw Error("Something went wrong with your request")
+      throw Error(`Something went wrong with your request, ${res.status}`)
     }
     return res.json()
   })
@@ -43,14 +43,33 @@ fetch("https://api.coingecko.com/api/v3/coins/ethereum")
 
 // Random Advice/Quotes
 fetch(`https://api.adviceslip.com/advice`)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('advice').innerHTML = `<q class="text-lg bg-gradient-to-r from-blue-500 to-transparent text-gray-200 font-bold px-6 py-4 border rounded-lg border-4 border-gray-200">${data.slip.advice}</q>`
+  .then(res => {
+    if (!res.ok) {
+      throw Error(`Something went wrong with your request, ${res.status}`)
+    }
+    return res.json()
   })
+  .then(data => {
+    let adviceToDisplay
+    // checking the length of the string received in order to
+    // not break the UI(styling/appearance of the text next to the EPL table)
+    if (data.slip.advice.length <= 60) {
+      adviceToDisplay = data.slip.advice
+    } else {
+      adviceToDisplay = "Sarcasm is the lowest form of wit. Employ correctly with apt timing."
+    }
+    document.getElementById('advice').innerHTML = `<q class="text-lg bg-gradient-to-r from-gray-800 to-transparent text-gray-200 font-bold px-6 py-4 border rounded-lg border-4 border-gray-200">${adviceToDisplay}</q>`
+  })
+  .catch(err => console.error(err))
 
 // English premier league current table standings
 fetch(`https://api-football-standings.azharimm.dev/leagues/eng.1/standings?season=2022&sort=asc`)
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) {
+      throw Error(`Something went wrong with your request, ${res.status}`)
+    }
+    return res.json()
+  })
   .then(data => {
     premierLeagueTable = data.data.standings.slice(0, 6)
     console.log(premierLeagueTable.length)
