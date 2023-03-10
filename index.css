@@ -9,9 +9,6 @@ body {
   --webkit-background-size: cover;
   --moz-background-size: cover;
   --o-background-size: cover;
-
-  /* color: white;
-  font-family: Arial, Helvetica, sans-serif; */
   text-shadow: 0px 0px 20px black;
 }
 
@@ -19,11 +16,18 @@ div#crypto-details>p {
   margin: 0;
 }
 
+div#crypto-details {
+  text-shadow: 0 0 2px black;
+}
+
 .weather-icon {
   max-width: 100%;
   width: 40%;
 }
 
+div#weather-details {
+  text-shadow: 0 0 10px black;
+}
 
 .team-logo {
   max-width: 100%;
