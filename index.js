@@ -1,13 +1,15 @@
-const defaultBgImage = `https://images.unsplash.com/photo-1632864790429-9669f5c2ecd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMyNTU0NTg&ixlib=rb-4.0.3&q=80&w=1080`
-const defaultLocation = 'Kenia'
-let premierLeagueTable
+const defaultBgImage = `https://images.unsplash.com/photo-1632864790429-9669f5c2ecd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMyNTU0NTg&ixlib=rb-4.0.3&q=80&w=1080`;
+const defaultLocation = 'Kenia';
+let premierLeagueTable;
 let teamRank = 1;
 
 // Background Image and Details
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=afrika")
   .then(res => res.json())
   .then(data => {
-    document.body.style.backgroundImage = `url(${data.urls.regular})`
+    document.body.style.backgroundImage = `url(${data.urls.regular})`;
+    // This attribute lazy loads the bg image
+    document.body.setAttribute('data-bg', 'lazyload');
     if (data.location.name) {
       document.getElementById('location').innerHTML = `<p class="text-xl"><i class="fa-solid fa-location-pin text-orange-500"></i>&nbsp;${data.location.name}</p>`
     } else {
@@ -72,12 +74,11 @@ fetch(`https://api-football-standings.azharimm.dev/leagues/eng.1/standings?seaso
   })
   .then(data => {
     premierLeagueTable = data.data.standings.slice(0, 6)
-    console.log(premierLeagueTable.length)
     premierLeagueTable.forEach(item => {
       document.getElementById('epl-table').innerHTML += `
                   <tr class="table-row">
                     <td class="table-cell p-0 text-center">${teamRank++}</td>
-                    <td class="table-cell py-2"><img class="team-logo" src=${item.team.logos[0].href} alt="Team Logo">
+                    <td class="table-cell py-2"><img class="lazyload team-logo" data-src=${item.team.logos[0].href} alt="Team Logo">
                         ${item.team.abbreviation}</td>
                     <td class="table-cell py-2 text-center">${item.stats[2].displayValue}</td>
                   </tr>
@@ -108,7 +109,7 @@ navigator.geolocation.getCurrentPosition(position => {
       const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
       document.getElementById("weather-details").innerHTML = `
                 <div class="flex items-center justify-end text-lg">
-                    <img src=${iconUrl} class="weather-icon" alt="current weather icon"/>
+                    <img data-src=${iconUrl} class="lazyload weather-icon" alt="current weather icon"/>
                     <p class="weather-temp">${Math.round(data.main.temp)}º</p>
                 </div>
                 <p class="mt-0 capitalize text-lg">${data.weather[0].description}</p>
