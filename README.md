@@ -40,7 +40,7 @@ To enable the lazy loading on the images one needs the `lazyload` class to the i
 <img data-src="image.jpg" class="lazyload" />
 ```
 
-For the background image one adds the `data-bg` attribute which will be uised by the library to lazy load the background image
+For the background image one adds the `data-bg` attribute which will be used by the library to lazy load the background image
 
 ```js
 document.body.style.backgroundImage = `url(${data.urls.regular})`;
